@@ -23,19 +23,23 @@ class PEModuleTester(c: ProcessingElement, maxIterations: Int) extends PeekPokeT
 
     //test forwarding the weight to the next PE
     poke(c.io.unlockWeight, true.B)
+    println("  **Weight forwarding UNLOCKED")
     for (i <- 0 until weight) {
       poke(c.io.weight, i)
+      println("  **Current Weight of PE: " + c.io.weight)
       if (i > 1) {
         expect(c.io.forwardedWeight, i - 1)
       }
       step(1)
       expect(c.io.forwardedWeight, i)
+      println("  **Forwarded Weight: " + c.io.forwardedWeight)
     }
 
     //test locking the weight (stop flowing)
     poke(c.io.weight, weight)
     step(1)
     poke(c.io.unlockWeight, false.B)
+    println("  **Weight forwarding LOCKED")
     for (i <- 0 until weight) {
       poke(c.io.weight, i)
       step(1)

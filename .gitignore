@@ -342,3 +342,8 @@ hs_err_pid*
 project/.bloop/
 .metals
 .bloop
+src/main/scala/gcd/DecoupledGCD.scala
+src/main/scala/gcd/GCD.scala
+src/test/scala/gcd/GcdTesters2.scala
+src/test/scala/gcd/GCDUnitTest.scala
+src/test/scala/gcd/GCDMain.scala
