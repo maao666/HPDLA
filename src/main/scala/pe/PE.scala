@@ -2,8 +2,6 @@ package pe
 
 import chisel3._
 import chisel3.util._
-import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
-
 
 class ProcessingElement(width: Int, val fpSupported: Boolean) extends Module {
     require(width > 0)
@@ -20,7 +18,7 @@ class ProcessingElement(width: Int, val fpSupported: Boolean) extends Module {
         val forwardedWeight = Output(Bits(width.W))
     })
 
-    //backend modules
+    //Backend modules
     //Weight Backend
     val weightBackend = Module(new PEWeightBackend(width))
     weightBackend.suggestName("WeightBackend")
@@ -53,10 +51,10 @@ class ProcessingElement(width: Int, val fpSupported: Boolean) extends Module {
         fpResult <> fpBackend.io.outPartialSum
     }
 
-    //input propagation
+    //Input propagation
     io.forwardedInput := RegNext(io.input)
 
-    //partial sum result selection
+    //Partial sum result selection
     when(io.typeSelection === 1.U) {
         //SInt
         io.outPartialSum <> sIntBackend.io.outPartialSum.asUInt()
