@@ -201,59 +201,59 @@ module ProcessingElement(
 `ifdef RANDOMIZE_REG_INIT
   reg [31:0] _RAND_0;
 `endif // RANDOMIZE_REG_INIT
-  wire  WeightBackend_clock; // @[PE.scala 25:31]
-  wire  WeightBackend_io_propagate; // @[PE.scala 25:31]
-  wire [31:0] WeightBackend_io_weightIn; // @[PE.scala 25:31]
-  wire [31:0] WeightBackend_io_weightOut; // @[PE.scala 25:31]
-  wire  uIntBackend_clock; // @[PE.scala 33:29]
-  wire [31:0] uIntBackend_io_x1; // @[PE.scala 33:29]
-  wire [31:0] uIntBackend_io_x2; // @[PE.scala 33:29]
-  wire [31:0] uIntBackend_io_inPartialSum; // @[PE.scala 33:29]
-  wire [31:0] uIntBackend_io_outPartialSum; // @[PE.scala 33:29]
-  wire  sIntBackend_clock; // @[PE.scala 39:29]
-  wire [31:0] sIntBackend_io_x1; // @[PE.scala 39:29]
-  wire [31:0] sIntBackend_io_x2; // @[PE.scala 39:29]
-  wire [31:0] sIntBackend_io_inPartialSum; // @[PE.scala 39:29]
-  wire [31:0] sIntBackend_io_outPartialSum; // @[PE.scala 39:29]
-  reg [31:0] _T_3; // @[PE.scala 57:33]
-  wire  _T_4 = io_typeSelection == 2'h1; // @[PE.scala 60:27]
-  wire  _T_6 = io_typeSelection == 2'h0; // @[PE.scala 63:33]
-  wire [31:0] _GEN_0 = _T_6 ? uIntBackend_io_outPartialSum : 32'h0; // @[PE.scala 63:42]
-  PEWeightBackend WeightBackend ( // @[PE.scala 25:31]
+  wire  WeightBackend_clock; // @[PE.scala 23:31]
+  wire  WeightBackend_io_propagate; // @[PE.scala 23:31]
+  wire [31:0] WeightBackend_io_weightIn; // @[PE.scala 23:31]
+  wire [31:0] WeightBackend_io_weightOut; // @[PE.scala 23:31]
+  wire  uIntBackend_clock; // @[PE.scala 31:29]
+  wire [31:0] uIntBackend_io_x1; // @[PE.scala 31:29]
+  wire [31:0] uIntBackend_io_x2; // @[PE.scala 31:29]
+  wire [31:0] uIntBackend_io_inPartialSum; // @[PE.scala 31:29]
+  wire [31:0] uIntBackend_io_outPartialSum; // @[PE.scala 31:29]
+  wire  sIntBackend_clock; // @[PE.scala 37:29]
+  wire [31:0] sIntBackend_io_x1; // @[PE.scala 37:29]
+  wire [31:0] sIntBackend_io_x2; // @[PE.scala 37:29]
+  wire [31:0] sIntBackend_io_inPartialSum; // @[PE.scala 37:29]
+  wire [31:0] sIntBackend_io_outPartialSum; // @[PE.scala 37:29]
+  reg [31:0] _T_3; // @[PE.scala 55:33]
+  wire  _T_4 = io_typeSelection == 2'h1; // @[PE.scala 58:27]
+  wire  _T_6 = io_typeSelection == 2'h0; // @[PE.scala 61:33]
+  wire [31:0] _GEN_0 = _T_6 ? uIntBackend_io_outPartialSum : 32'h0; // @[PE.scala 61:42]
+  PEWeightBackend WeightBackend ( // @[PE.scala 23:31]
     .clock(WeightBackend_clock),
     .io_propagate(WeightBackend_io_propagate),
     .io_weightIn(WeightBackend_io_weightIn),
     .io_weightOut(WeightBackend_io_weightOut)
   );
-  PEUIntBackend uIntBackend ( // @[PE.scala 33:29]
+  PEUIntBackend uIntBackend ( // @[PE.scala 31:29]
     .clock(uIntBackend_clock),
     .io_x1(uIntBackend_io_x1),
     .io_x2(uIntBackend_io_x2),
     .io_inPartialSum(uIntBackend_io_inPartialSum),
     .io_outPartialSum(uIntBackend_io_outPartialSum)
   );
-  PESIntBackend sIntBackend ( // @[PE.scala 39:29]
+  PESIntBackend sIntBackend ( // @[PE.scala 37:29]
     .clock(sIntBackend_clock),
     .io_x1(sIntBackend_io_x1),
     .io_x2(sIntBackend_io_x2),
     .io_inPartialSum(sIntBackend_io_inPartialSum),
     .io_outPartialSum(sIntBackend_io_outPartialSum)
   );
-  assign io_outCompensation = 32'h0; // @[PE.scala 52:28]
-  assign io_outPartialSum = _T_4 ? sIntBackend_io_outPartialSum : _GEN_0; // @[PE.scala 62:26 PE.scala 65:26 PE.scala 68:42]
-  assign io_forwardedInput = _T_3; // @[PE.scala 57:23]
-  assign io_forwardedWeight = WeightBackend_io_weightOut; // @[PE.scala 29:24]
+  assign io_outCompensation = 32'h0; // @[PE.scala 50:28]
+  assign io_outPartialSum = _T_4 ? sIntBackend_io_outPartialSum : _GEN_0; // @[PE.scala 60:26 PE.scala 63:26 PE.scala 66:42]
+  assign io_forwardedInput = _T_3; // @[PE.scala 55:23]
+  assign io_forwardedWeight = WeightBackend_io_weightOut; // @[PE.scala 27:24]
   assign WeightBackend_clock = clock;
-  assign WeightBackend_io_propagate = io_unlockWeight; // @[PE.scala 27:32]
-  assign WeightBackend_io_weightIn = io_weight; // @[PE.scala 28:31]
+  assign WeightBackend_io_propagate = io_unlockWeight; // @[PE.scala 25:32]
+  assign WeightBackend_io_weightIn = io_weight; // @[PE.scala 26:31]
   assign uIntBackend_clock = clock;
-  assign uIntBackend_io_x1 = io_weight; // @[PE.scala 34:23]
-  assign uIntBackend_io_x2 = io_input; // @[PE.scala 35:23]
-  assign uIntBackend_io_inPartialSum = io_inPartialSum; // @[PE.scala 36:33]
+  assign uIntBackend_io_x1 = io_weight; // @[PE.scala 32:23]
+  assign uIntBackend_io_x2 = io_input; // @[PE.scala 33:23]
+  assign uIntBackend_io_inPartialSum = io_inPartialSum; // @[PE.scala 34:33]
   assign sIntBackend_clock = clock;
-  assign sIntBackend_io_x1 = io_weight; // @[PE.scala 40:23]
-  assign sIntBackend_io_x2 = io_input; // @[PE.scala 41:23]
-  assign sIntBackend_io_inPartialSum = io_inPartialSum; // @[PE.scala 42:33]
+  assign sIntBackend_io_x1 = io_weight; // @[PE.scala 38:23]
+  assign sIntBackend_io_x2 = io_input; // @[PE.scala 39:23]
+  assign sIntBackend_io_inPartialSum = io_inPartialSum; // @[PE.scala 40:33]
 `ifdef RANDOMIZE_GARBAGE_ASSIGN
 `define RANDOMIZE
 `endif
