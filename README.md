@@ -1,9 +1,15 @@
-# Deep Learning Accelerator
+# Deep Learning Accelerator Generator
 
-## Processing Element Unit Test
+## Test Tile
 
 ```shell
-make test
+make test-tile
+```
+
+## Test Processing Element
+
+```shell
+make test-pe
 ```
 
 ## Generate Verilog Code
