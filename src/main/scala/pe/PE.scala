@@ -7,15 +7,19 @@ class ProcessingElement(width: Int, val fpSupported: Boolean) extends Module {
     require(width > 0)
     val io = IO(new Bundle {
         val input = Input(Bits(width.W))
+        val forwardedInput = Output(Bits(width.W))
+
         val weight = Input(Bits(width.W))
         val unlockWeight = Input(Bool())
+        val forwardedWeight = Output(Bits(width.W))
+
         val inPartialSum = Input(Bits(width.W))
+        val outPartialSum = Output(Bits(width.W))
+        
         val typeSelection = Input(if (fpSupported) UInt(2.W) else UInt(1.W)) //0 for UInt, 1 for SInt, 2 for FP, 3 disabled
+        
         val inCompensation = Input(if (fpSupported) Bits(width.W) else Bits(0.W)) //only meaningful for fp
         val outCompensation = Output(if (fpSupported) Bits(width.W) else Bits(0.W)) //only meaningful for fp
-        val outPartialSum = Output(Bits(width.W))
-        val forwardedInput = Output(Bits(width.W))
-        val forwardedWeight = Output(Bits(width.W))
     })
 
     //Backend modules
